@@ -1,6 +1,6 @@
 #!/bin/bash
 #sh curlGETtweets.sh
-sh curlGETtweets.sh | jq -c '.[] |.text' | grep "#SAviso" | sed 's/#SAviso //g' > texto.txt
+sh curlGETtweets.sh | ./jq -c '.[] | .text' | grep "#SAviso" | sed 's/#SAviso //g' > texto.txt
 mapfile -t lineas < texto.txt
 touch eliminacion
 touch fechas
@@ -50,3 +50,5 @@ sed -i 's/^.\|.$//g' mensajes2 #elimino primer y ultimo caracter (eliminar las "
 sed -i s/"#f[0-9]* "//g mensajes2 #elimina los hashtags que no interesan en el mensaje final
 sed -i s/"#t[0-9]* "//g mensajes2
 mv mensajes2 carrusel.txt
+
+sh curlAnalitycs.sh |  tr , '\n' | grep "totalsForAllResults" | cut -d'"' -f6 > visitas.txt

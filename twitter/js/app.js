@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	const request_data = {
+	var request_data = {
 		url: 'js/carrusel.txt',
 		method: 'GET',
 		data: { q: '#SAviso' }
@@ -16,5 +16,17 @@ $(document).ready(function () {
 			var mensaje = data.split("\n"); 
 			mensaje.pop();
 			mensaje.forEach(crearCuadro);
+		});
+
+	var request_data_visit = {
+		url: 'js/visitas.txt',
+		method: 'GET'
+		};
+	$.ajax({
+	  	url: request_data_visit.url,
+	  	type: request_data_visit.method
+		}).done(function(visit) {
+			console.log(visit);
+				$(".visitas").append("<h1>Visitas Totales: "+visit+"</h1>");
 		});
 });
